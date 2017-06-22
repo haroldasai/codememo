@@ -1,3 +1,3 @@
- ## codememo: a Website where you can post syntax or code clips of any programming languages.
+ ## codememo: a Website which you can use it as coding study note.
  
  Made by [Harold Asai](http://www.letmefix-it.com).
