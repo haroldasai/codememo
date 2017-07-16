@@ -1,0 +1,24 @@
+<h1>New Tip</h1>
+ 
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for tips</p>
+    <ul>
+      <li>Make sure it relates to the parent category.</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= form_for [@topic, @tip] do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', placeholder: "Enter tip title" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, rows: 8, class: 'form-control', placeholder: "Enter tip description" %>
+      </div>
+
+      <%= f.submit "Save", class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

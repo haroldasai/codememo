@@ -11,7 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623035627) do
+ActiveRecord::Schema.define(version: 20170625064707) do
+
+  create_table "codes", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "tip_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "language_id"
+    t.integer  "user_id"
+  end
+
+  add_index "codes", ["language_id"], name: "index_codes_on_language_id"
+  add_index "codes", ["tip_id"], name: "index_codes_on_tip_id"
+  add_index "codes", ["user_id"], name: "index_codes_on_user_id"
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "name"
+    t.string   "version"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "tips", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "topic_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+  end
+
+  add_index "tips", ["id"], name: "index_tips_on_id", unique: true
+  add_index "tips", ["topic_id"], name: "index_tips_on_topic_id"
+  add_index "tips", ["user_id"], name: "index_tips_on_user_id"
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "topics", ["id"], name: "index_topics_on_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

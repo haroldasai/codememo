@@ -6,6 +6,18 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  resources :topics do
+    resources :tips, except: [:index]
+  end
+
+  resources :tips, only: [] do
+    resources :codes, except: [:index, :show, ]
+  end
+
+  resources :languages, except: [:show]
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,26 @@
+<h1>Languages</h1>
+ 
+<div class="row">
+  <div class="col-md-8">
+ <!-- #7 -->
+    <% @languages.each do |language| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+ <!-- #8 -->
+            <%= link_to language.name, language %>
+          </h4>
+          <small>
+            <%= language.description %>
+          </small>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+    <div class="col-md-4">
+ <!-- #9 -->
+      <%= link_to "New Language", new_language_path, class: 'btn btn-success' %>
+    </div>
+
+</div>
