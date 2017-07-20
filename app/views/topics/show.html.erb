@@ -1,13 +1,20 @@
-<h1><%= @topic.name %></h1>
- 
-<!-- auth -->
-  <%= link_to "Edit Category", edit_topic_path, class: 'btn btn-success' %>
-  <%= link_to "Delete Category", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %> 
-<!-- auth -->
 <div class="row">
-  <div class="col-md-8">
-    <p class="lead"><%= @topic.description %></p>
+  <div class="col-md-6">
+    <h2><%= @topic.name %></h2>
+    <p><%= @topic.description %></p>
+    <%= link_to "New Tip", new_topic_tip_path(@topic), class: 'btn btn-success' %>
+  </div>
+  <div class="col-md-3">
+    <br>
+    <br>
+    <%= link_to "Edit", edit_topic_path, class: 'edit-link' %>&nbsp;
+    <%= link_to "Delete", @topic, method: :delete, class: 'delete-link', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+  </div>  
+</div>
 
+<div class="row">
+  <br>
+  <div class="col-md-12">
     <% @topic.tips.each do |tip| %>
       <div class="media">
         <div class="media-body">
@@ -23,9 +30,5 @@
       </div>
     <% end %>
   
-  </div>
-
-  <div class="col-md-4">
-      <%= link_to "New Tip", new_topic_tip_path(@topic), class: 'btn btn-success' %>
   </div>
 </div>

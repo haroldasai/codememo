@@ -1,7 +1,8 @@
 <h1>Categories</h1>
+<%= link_to "New Category", new_topic_path, class: 'btn btn-success' %> 
 <div class="row">
-  <div class="col-md-8">
- <!-- #7 -->
+  <br>
+  <div class="col-md-12">
     <% def print_tree(item, level) %>
       <% items = @tree[item] %>
       <% unless items == nil %>
@@ -21,10 +22,4 @@
 
     <% print_tree(@root, 0) %>
   </div>
-
-    <div class="col-md-4">
- <!-- #9 -->
-      <%= link_to "New Category", new_topic_path, class: 'btn btn-success' %>
-    </div>
-
 </div>
