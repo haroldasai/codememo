@@ -1,7 +1,25 @@
 class TopicsController < ApplicationController
 
   def index
-    @topics = Topic.all
+    @root = Topic.find(0)
+    @topics = Topic.where.not(id: 0)
+    
+    map = {}
+    
+    @topics.each do |e|
+      map[e[:id]] = e
+    end
+    
+    @tree = {}
+    
+    @topics.each do |e|
+      pid = e[:parent_id]
+      if pid == nil || !map.has_key?(pid)
+        (@tree[@root] ||= []) << e
+      else
+        (@tree[map[pid]] ||= []) << e
+      end
+    end  
   end
 
   def show
@@ -10,6 +28,7 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    @topics = Topic.all
   end
 
   def create
@@ -25,6 +44,7 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
+    @topics = Topic.where.not(id: params[:id])
   end
 
   def update
@@ -56,6 +76,6 @@ class TopicsController < ApplicationController
   private
  
   def topic_params
-    params.require(:topic).permit(:name, :description)
+    params.require(:topic).permit(:name, :description, :parent_id)
   end
 end

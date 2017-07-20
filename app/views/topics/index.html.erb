@@ -1,21 +1,25 @@
 <h1>Categories</h1>
- 
 <div class="row">
   <div class="col-md-8">
  <!-- #7 -->
-    <% @topics.each do |topic| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
- <!-- #8 -->
-            <%= link_to topic.name, topic %>
-          </h4>
-          <small>
-            <%= simple_format topic.description %>
-          </small>
-        </div>
-      </div>
+    <% def print_tree(item, level) %>
+      <% items = @tree[item] %>
+      <% unless items == nil %>
+        <% indent = level > 0 ? '&nbsp;&nbsp;'* level + '--' : "" %>
+        <% items.each do |e| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%= indent.html_safe %><%= link_to e.name, e %>
+              </h4>
+            </div>
+          </div>
+          <% print_tree(e, level + 1) %>      
+        <% end %>
+      <% end %>
     <% end %>
+
+    <% print_tree(@root, 0) %>
   </div>
 
     <div class="col-md-4">
