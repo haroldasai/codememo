@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
     @tree = {}
     
     @topics.each do |e|
-      pid = e[:parent_id]
+      pid = e[:topic_id]
       if pid == nil || !map.has_key?(pid)
         (@tree[@root] ||= []) << e
       else
@@ -76,6 +76,6 @@ class TopicsController < ApplicationController
   private
  
   def topic_params
-    params.require(:topic).permit(:name, :description, :parent_id)
+    params.require(:topic).permit(:name, :description, :topic_id)
   end
 end
