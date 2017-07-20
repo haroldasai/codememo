@@ -11,7 +11,7 @@ class LanguagesController < ApplicationController
     @language = Language.new(language_params)
 
     if @language.save
-      redirect_to languages_path, notice: "Language was saved successfully."
+      redirect_to languages_path, notice: "\"#{@language.name}\" was saved successfully."
     else
       flash.now[:alert] = "Error creating language. Please try again."
       render :new
@@ -28,8 +28,7 @@ class LanguagesController < ApplicationController
     @language.assign_attributes(language_params)
  
     if @language.save
-      flash[:notice] = "Language was updated."
-      redirect_to @language
+      redirect_to languages_path, notice: "\"#{@language.name}\" was updated."
     else
       flash.now[:alert] = "Error saving language. Please try again."
       render :edit
@@ -44,7 +43,7 @@ class LanguagesController < ApplicationController
       redirect_to action: :index
     else
       flash.now[:alert] = "There was an error deleting the language."
-      render :show
+      redirect_to action: :index
     end
   end
   

@@ -1,26 +1,37 @@
 <h1>Languages</h1>
- 
+<br>
 <div class="row">
   <div class="col-md-8">
  <!-- #7 -->
     <% @languages.each do |language| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
  <!-- #8 -->
-            <%= link_to language.name, language %>
-          </h4>
-          <small>
-            <%= language.description %>
-          </small>
+                <%= language.name + " " + language.version %>
+              </h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="media">
+            <div class="media-body">
+              <%= link_to "Edit", edit_language_path(language), class: 'btn btn-success language' %> <%= link_to "Delete", [language], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this language?' } %>
+            </div>
+          </div>  
         </div>
       </div>
+      <div class="row">
+      <p>&nbsp;</p>
+      </div>  
     <% end %>
   </div>
 
-    <div class="col-md-4">
+  <div class="col-md-4">
  <!-- #9 -->
-      <%= link_to "New Language", new_language_path, class: 'btn btn-success' %>
-    </div>
+    <%= link_to "New Language", new_language_path, class: 'btn btn-success' %>
+  </div>
 
 </div>
