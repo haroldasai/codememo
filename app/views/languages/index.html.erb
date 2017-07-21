@@ -2,11 +2,11 @@
 <%= link_to "New Language", new_language_path, class: 'btn btn-success' %>
 <div class="row">
   <br>
-  <div class="col-md-8">
+  <div class="col-md-12">
  <!-- #7 -->
     <% @languages.each do |language| %>
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-6">
           <div class="media">
             <div class="media-body">
               <h4 class="media-heading">
@@ -16,7 +16,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
           <div class="media">
             <div class="media-body">
               <%= link_to "Edit", edit_language_path(language), class: 'edit-link' %>&nbsp; <%= link_to "Delete", [language], method: :delete, class: 'delete-link', data: { confirm: 'Are you sure you want to delete this language?' } %>
