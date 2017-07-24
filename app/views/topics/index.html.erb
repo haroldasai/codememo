@@ -3,23 +3,22 @@
 <div class="row">
   <br>
   <div class="col-md-12">
-    <% def print_tree(item, level) %>
-      <% items = @tree[item] %>
-      <% unless items == nil %>
-        <% indent = level > 0 ? '&nbsp;&nbsp;'* level + '--' : "" %>
-        <% items.each do |e| %>
-          <div class="media">
-            <div class="media-body">
-              <h4 class="media-heading">
-                <%= indent.html_safe %><%= link_to e.name, e %>
-              </h4>
-            </div>
-          </div>
-          <% print_tree(e, level + 1) %>      
-        <% end %>
-      <% end %>
-    <% end %>
-
-    <% print_tree(@root, 0) %>
+    <% def print_tree(item, level)
+         items = @tree[item]
+         unless items == nil
+           indent = level > 0 ? '&nbsp;&nbsp;'* level + '--' : "" 
+           items.each do |e| %>
+             <div class="media">
+               <div class="media-body">
+                 <h4 class="media-heading">
+                   <%= indent.html_safe %><%= link_to e.name, e %>
+                 </h4>
+               </div>
+             </div>
+             <% print_tree(e, level + 1)      
+           end 
+         end
+       end
+       print_tree(@root, 0) %>
   </div>
 </div>
