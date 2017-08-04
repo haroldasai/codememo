@@ -43,28 +43,7 @@
     </div>
 
     <div class="col-md-2">
-      <h3>Categories</h3>
-      <%= link_to "New Category", new_topic_path, class: 'btn btn-success' %>
-      <div class="row">
-        <br> 
-        <% def print_tree(item, level) %>
-          <% items = @tree[item] %>
-          <% unless items == nil %>
-            <% indent = level > 0 ? '&nbsp;&nbsp;'* level + '--' : "" %>
-            <% items.each do |e| %>
-              <div class="media">
-                <div class="media-body">
-                  <h5 class="media-heading">
-                    &nbsp;&nbsp;&nbsp;&nbsp;<%= indent.html_safe %><%= link_to e.name, e %>
-                  </h5>
-                </div>
-              </div>
-              <% print_tree(e, level + 1) %>      
-            <% end %>
-          <% end %>
-        <% end %>
-        <% print_tree(@root, 0) %>
-      </div>
+      <%= render partial: 'topics/sidebar' %>
     </div>
 
   </div>
