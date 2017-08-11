@@ -27,15 +27,19 @@ class TopicsController < ApplicationController
   end
 
   def new
+    @category = Category.find(params[:category_id])
     @topic = Topic.new
-    @topics = Topic.all
+    @topics = Topic.where(category_id: @category)
+    @topics.unshift(Topic.find(0))
   end
 
   def create
+    @category = Category.find(params[:category_id])
     @topic = Topic.new(topic_params)
+    @topic.category = @category
 
     if @topic.save
-      redirect_to @topic, notice: "Topic was saved successfully."
+      redirect_to [@category, @topic], notice: "Topic was saved successfully."
     else
       flash.now[:alert] = "Error creating topic. Please try again."
       render :new
@@ -44,17 +48,18 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
-    @topics = Topic.where.not(id: params[:id])
+    topics = Topic.where(category_id: @topic.category)
+    @topics = topics.where.not(id: params[:id])
+    @topics.unshift(Topic.find(0))
   end
 
   def update
     @topic = Topic.find(params[:id])
- 
     @topic.assign_attributes(topic_params)
  
     if @topic.save
       flash[:notice] = "Topic was updated."
-      redirect_to @topic
+      redirect_to [@topic.category, @topic]
     else
       flash.now[:alert] = "Error saving topic. Please try again."
       render :edit
@@ -62,11 +67,12 @@ class TopicsController < ApplicationController
   end  
 
   def destroy
+    @category = Category.find(params[:category_id])
     @topic = Topic.find(params[:id])
  
     if @topic.destroy
       flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
-      redirect_to action: :index
+      redirect_to @category
     else
       flash.now[:alert] = "There was an error deleting the topic."
       render :show

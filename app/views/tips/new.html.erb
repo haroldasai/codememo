@@ -1,4 +1,6 @@
-<h1>New Tip</h1>
+<%= link_to @topic.category.name, category_path(@topic.category), class: 'edit-link' %> > <%= link_to @topic.name, category_topic_path(@topic.category, @topic), class: 'edit-link' %> > new tip
+
+<h3>New Tip</h3>
  
 <div class="row">
   <div class="col-md-4">

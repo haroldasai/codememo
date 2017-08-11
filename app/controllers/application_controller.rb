@@ -5,24 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :set_page
 
   def set_page
-    @root = Topic.find(0)
-    @topics = Topic.where.not(id: 0)
-    
-    map = {}
-    
-    @topics.each do |e|
-      map[e[:id]] = e
-    end
-    
-    @tree = {}
-    
-    @topics.each do |e|
-      pid = e[:topic_id]
-      if pid == nil || !map.has_key?(pid)
-        (@tree[@root] ||= []) << e
-      else
-        (@tree[map[pid]] ||= []) << e
-      end
-    end
+    @categories = Category.all
   end
 end

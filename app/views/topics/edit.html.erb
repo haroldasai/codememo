@@ -1,4 +1,6 @@
-<h1>Edit Category</h1>
+<%= link_to @topic.category.name, category_path(@topic.category), class: 'edit-link' %> > <%= link_to @topic.name, category_topic_path(@topic.category, @topic), class: 'edit-link' %> > edit topic
+
+<h3>Edit Topic</h3>
  
 <div class="row">
   <div class="col-md-4">
@@ -10,7 +12,7 @@
     </ul>
   </div>
   <div class="col-md-8">
-    <%= form_for @topic do |f| %>
+    <%= form_for [@topic.category, @topic] do |f| %>
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control', placeholder: "Enter category name" %>
@@ -20,7 +22,7 @@
         <%= f.text_area :description, rows: 8, class: 'form-control', placeholder: "Enter category description" %>
       </div>
       <div class="form-group">
-        <%= f.label :parent_category%>
+        <%= f.label :parent_topic%>
         <%= f.collection_select(:topic_id, @topics, :id, :name, {:prompt=>false}) %>
       </div>
       <%= f.submit "Save", class: 'btn btn-success' %>

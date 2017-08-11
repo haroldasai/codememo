@@ -1,22 +1,28 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users
   
   get 'about' =>  'welcome#about'
+  get 'general' => 'general#index'
 
   root 'welcome#index'
 
-  resources :topics do
+  resources :topics, only: [] do
     resources :tips, except: [:index]
   end
 
   resources :tips, only: [] do
     resources :codes, except: [:index, :show, ]
+    resources :commands, except: [:index, :show, ]
   end
 
   resources :languages, except: [:show]
 
+  resources :platforms, except: [:show]
 
+  resources :categories do
+    resources :topics
+  end  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

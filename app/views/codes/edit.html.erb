@@ -1,4 +1,6 @@
-<h1>New Edit</h1>
+<%= link_to @code.tip.topic.category.name, category_path(@code.tip.topic.category), class: 'edit-link' %> > <%= link_to @code.tip.topic.name, category_topic_path(@code.tip.topic.category, @code.tip.topic), class: 'edit-link' %> > <%= link_to @code.tip.title, topic_tip_path(@code.tip.topic, @code.tip), class: 'edit-link' %> > edit code
+
+<h3>Edit code</h3>
  
 <div class="row">
   <div class="col-md-4">
@@ -18,6 +20,16 @@
       <div class="form-group">
         <%= f.label :language %>
         <%= f.collection_select(:language_id, @languages, :id, :name, {:prompt=>false}) %>
+      </div> 
+
+      <div class="form-group">
+        <%= f.label :note %>
+        <%= f.text_field :note, class: 'form-control', placeholder: "Version info etc." %>
+      </div> 
+
+      <div class="form-group">
+        <%= f.label :url %>
+        <%= f.text_field :url, class: 'form-control', placeholder: "Enter link to your work" %>
       </div> 
 
       <%= f.submit "Save", class: 'btn btn-success' %>

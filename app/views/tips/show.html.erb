@@ -1,7 +1,9 @@
+<%= link_to @tip.topic.category.name, category_path(@tip.topic.category), class: 'edit-link' %> > <%= link_to @tip.topic.name, category_topic_path(@tip.topic.category, @tip.topic), class: 'edit-link' %> > <%= @tip.title %>
+
 <div class="row">
   <div class="col-md-9">
     <h3><%= @tip.title %></h3>
-      <%= link_to "New Code", new_tip_code_path(@tip), class: 'btn btn-success' %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Back to Tips", topic_path(@tip.topic) %>
+      <%= link_to "New Code", new_tip_code_path(@tip), class: 'btn btn-success' %> or <%= link_to "New Command", new_tip_command_path(@tip), class: 'btn btn-success' %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Back to the topic", category_topic_path(@tip.topic.category, @tip.topic) %>
   </div>
   <div class="col-md-3">
   <br>
@@ -16,6 +18,8 @@
         <!-- <div class="media-body"> -->
         <h4 class="media-heading"><%= @languages.find(code.language_id).name %></h4> 
         <pre><%= simple_format code.body %></pre>
+        Note: <%= code.note %> <br>
+        Link to your work: <a href=<%= code.url %>><%= code.url %></a>
         <!-- </div> -->
       </div>
     </div>
@@ -26,6 +30,36 @@
     <div class="col-md-3">
       <%= link_to "Edit", edit_tip_code_path(code.tip, code), class: 'edit-link' %>&nbsp;
     <%= link_to "Delete", [code.tip, code], method: :delete, class: 'delete-link', data: { confirm: 'Are you sure you want to delete this code?' } %>
+    </div>
+  </div>  
+<% end %>
+
+<% @tip.commands.each do |command| %> 
+  <div class="row">
+    <br>
+    <div class="col-md-11">
+      <div class="media">
+        <!-- <div class="media-body"> -->
+        <h4 class="media-heading"><%= command.description %></h4> 
+        <pre><%= simple_format command.command %></pre>
+        Version Info: <b><%= command.app_version %></b><br>
+        This command was tested on:
+        <% array = command.platform_ids.split(",")
+        array.each do |i| %>
+          <b><%= @platforms.find(i).label_name %></b>,
+        <% end %>
+        <br>
+        Link to your work: <a href=<%= command.url %>><%= command.url %></a>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+    </div>
+    <div class="col-md-3">
+      <%= link_to "Edit", edit_tip_command_path(command.tip, command), class: 'edit-link' %>&nbsp;
+    <%= link_to "Delete", [command.tip, command], method: :delete, class: 'delete-link', data: { confirm: 'Are you sure you want to delete this command?' } %>
     </div>
   </div>  
 <% end %>

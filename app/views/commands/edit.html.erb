@@ -1,0 +1,43 @@
+<%= link_to @command.tip.topic.category.name, category_path(@command.tip.topic.category), class: 'edit-link' %> > <%= link_to @command.tip.topic.name, category_topic_path(@command.tip.topic.category, @command.tip.topic), class: 'edit-link' %> > <%= link_to @command.tip.title, topic_tip_path(@command.tip.topic, @command.tip), class: 'edit-link' %> > edit command
+
+<h3>Edit command</h3>
+ 
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for commands</p>
+    <ul>
+      <li>It's commanding time!</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= form_for [@command.tip, @command] do |f| %>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control', placeholder: "Enter command description" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :command %>
+        <%= f.text_area :command, rows: 8, class: 'form-control', placeholder: "Write command here" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :This_command_was_tested_on %><br>
+        <%= f.collection_check_boxes(:platform_ids, @platforms, :id, :label_name, { checked: @array.map(&:to_param) }) %>
+      </div> 
+
+      <div class="form-group">
+        <%= f.label :app_or_db_version %>
+        <%= f.text_field :app_version, class: 'form-control', placeholder: "Enter version info" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :url %>
+        <%= f.text_field :url, class: 'form-control', placeholder: "Enter link to your work" %>
+      </div> 
+
+      <%= f.submit "Save", class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

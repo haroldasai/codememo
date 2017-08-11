@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720061652) do
+ActiveRecord::Schema.define(version: 20170811092653) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "codes", force: :cascade do |t|
     t.text     "body"
@@ -20,11 +27,40 @@ ActiveRecord::Schema.define(version: 20170720061652) do
     t.datetime "updated_at",  null: false
     t.integer  "language_id"
     t.integer  "user_id"
+    t.text     "url"
+    t.text     "note"
   end
 
   add_index "codes", ["language_id"], name: "index_codes_on_language_id"
   add_index "codes", ["tip_id"], name: "index_codes_on_tip_id"
   add_index "codes", ["user_id"], name: "index_codes_on_user_id"
+
+  create_table "command_platforms", force: :cascade do |t|
+    t.integer  "command_id"
+    t.integer  "platform_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "command_platforms", ["command_id"], name: "index_command_platforms_on_command_id"
+  add_index "command_platforms", ["id"], name: "index_command_platforms_on_id", unique: true
+  add_index "command_platforms", ["platform_id"], name: "index_command_platforms_on_platform_id"
+
+  create_table "commands", force: :cascade do |t|
+    t.text     "description"
+    t.text     "command"
+    t.text     "url"
+    t.integer  "tip_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.text     "platform_ids"
+    t.string   "app_version"
+  end
+
+  add_index "commands", ["id"], name: "index_commands_on_id", unique: true
+  add_index "commands", ["tip_id"], name: "index_commands_on_tip_id"
+  add_index "commands", ["user_id"], name: "index_commands_on_user_id"
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
@@ -33,6 +69,17 @@ ActiveRecord::Schema.define(version: 20170720061652) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "platforms", force: :cascade do |t|
+    t.string   "name"
+    t.string   "version"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "label_name"
+  end
+
+  add_index "platforms", ["id"], name: "index_platforms_on_id", unique: true
 
   create_table "tips", force: :cascade do |t|
     t.string   "title"
@@ -53,8 +100,10 @@ ActiveRecord::Schema.define(version: 20170720061652) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "topic_id"
+    t.integer  "category_id"
   end
 
+  add_index "topics", ["category_id"], name: "index_topics_on_category_id"
   add_index "topics", ["id"], name: "index_topics_on_id", unique: true
   add_index "topics", ["topic_id"], name: "index_topics_on_topic_id"
 

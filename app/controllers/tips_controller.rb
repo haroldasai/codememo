@@ -2,6 +2,7 @@ class TipsController < ApplicationController
   def show
   	@tip = Tip.find(params[:id])
     @languages = Language.all
+    @platforms = Platform.all
   end
 
   def new
@@ -49,7 +50,7 @@ def create
  # #8
     if @tip.destroy
       flash[:notice] = "\"#{@tip.title}\" was deleted successfully."
-      redirect_to @tip.topic
+      redirect_to [@tip.topic.category, @tip.topic]
     else
       flash.now[:alert] = "There was an error deleting the tip."
       render :show

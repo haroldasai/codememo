@@ -3,4 +3,6 @@ class Code < ActiveRecord::Base
   belongs_to :tip
   belongs_to :user
   belongs_to :language		
+
+  validates :body, length: { minimum: 1 }, presence: true
 end
