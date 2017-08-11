@@ -17,20 +17,19 @@
 <div class="row">
   <br>
   <div class="col-md-12">
+    <div class="media">
+      <div class="media-body">
     <% @topic.tips.each do |tip| %>
-      <div class="media">
-        <div class="media-body">
           <h4 class="media-heading">
             <%= link_to tip.title, topic_tip_path(@topic, tip) %>
           </h4>
-          <% if false %>
+      <% if false %>
           <small>
              submitted <%= time_ago_in_words(tip.created_at) %> ago by <%= tip.user.email %>
           </small>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
     <% end %>
-  
+      </div>
+    </div>
   </div>
 </div>

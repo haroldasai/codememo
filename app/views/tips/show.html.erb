@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-9">
     <h3><%= @tip.title %></h3>
-      <%= link_to "New Code", new_tip_code_path(@tip), class: 'btn btn-success' %> or <%= link_to "New Command", new_tip_command_path(@tip), class: 'btn btn-success' %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Back to the topic", category_topic_path(@tip.topic.category, @tip.topic) %>
+      <%= link_to "New Code", new_tip_code_path(@tip), class: 'btn btn-success' %> or <%= link_to "New Command", new_tip_command_path(@tip), class: 'btn btn-success' %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Back to topic", category_topic_path(@tip.topic.category, @tip.topic) %>
   </div>
   <div class="col-md-3">
   <br>
