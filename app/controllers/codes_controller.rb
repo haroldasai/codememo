@@ -55,6 +55,6 @@ class CodesController < ApplicationController
   private
  
   def code_params
-    params.require(:code).permit(:body, :language_id, :url)
+    params.require(:code).permit(:body, :language_id, :note, :url)
   end
 end
