@@ -19,7 +19,7 @@
         <h4 class="media-heading"><%= @languages.find(code.language_id).name %></h4> 
         <pre><%= simple_format code.body %></pre>
         Note: <%= code.note %> <br>
-        Link to your work: <a href=<%= code.url %>, target="_blank"><%= code.url %></a>
+        Link to your work: <a href=<%= code.url %> target="_blank"><%= code.url %></a>
         <!-- </div> -->
       </div>
     </div>
@@ -49,7 +49,7 @@
           <b><%= @platforms.find(i).label_name %></b>,
         <% end %>
         <br>
-        Link to your work: <a href=<%= command.url %>><%= command.url %></a>
+        Link to your work: <a href=<%= command.url %> target="_blank"><%= command.url %></a>
         <!-- </div> -->
       </div>
     </div>
