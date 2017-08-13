@@ -19,7 +19,7 @@
         <h4 class="media-heading"><%= @languages.find(code.language_id).name %></h4> 
         <pre><%= simple_format code.body %></pre>
         Note: <%= code.note %> <br>
-        Link to your work: <a href=<%= code.url %>><%= code.url %></a>
+        Link to your work: <a href=<%= code.url %>, target="_blank"><%= code.url %></a>
         <!-- </div> -->
       </div>
     </div>
