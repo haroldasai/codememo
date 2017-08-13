@@ -1,4 +1,4 @@
-<%= link_to @tip.topic.category.name, category_path(@tip.topic.category), class: 'edit-link' %> > <%= link_to @tip.topic.name, category_topic_path(@tip.topic.category, @tip.topic), class: 'edit-link' %> > <%= link_to @tip.title, topic_tip_path(@tip.topic, @tip), class: 'edit-link' %> > new code
+<%= link_to @tip.topic.category.name, category_path(@tip.topic.category), class: 'edit-link' %> > <%= link_to topic_link_label(@tip.topic), category_topic_path(@tip.topic.category, @tip.topic), class: 'edit-link' %> > <%= link_to @tip.title, topic_tip_path(@tip.topic, @tip), class: 'edit-link' %> > new code
 
 <h3>New code</h3>
  

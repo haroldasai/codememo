@@ -1,4 +1,5 @@
-<%= link_to @topic.category.name, category_path(@topic.category), class: 'edit-link' %> > <%= @topic.name %>
+<%= link_to @topic.category.name, category_path(@topic.category), class: 'edit-link' %> >
+<%= topic_link_label(@topic) %>
 
 <div class="row">
   <div class="col-md-9">
